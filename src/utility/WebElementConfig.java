@@ -23,7 +23,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * 
- * class with methods necessary for testing
+ * klasa sa metodama potrebnim za testiranje
  *
  */
 
@@ -102,11 +102,13 @@ public class WebElementConfig {
 		for (int i = 0; i <= fillValue.size() - 1; i++) {
 			findWebElement(driver, xpathInput).sendKeys(fillValue.get(i));
 		}
+		// findWebElement(driver, xpathInput).sendKeys(fillValue);
 	}
 
 	public static void scrollDownPage(JavascriptExecutor jsx, WebDriver driver) {
 
 		jsx = (JavascriptExecutor) driver;
+		// jsx.executeScript("window.scrollBy(0, 300)", "");
 		jsx.executeScript("window.scrollTo(0,document.body.scrollHeight);");
 	}
 
@@ -138,21 +140,6 @@ public class WebElementConfig {
 			}
 			jse.executeScript("window.scrollBy(0,10)", "");
 			Thread.sleep(500);
-		}
-	}
-
-	public static void findJavaScriptVoid(WebDriver driver, String xpathInput) {
-
-		List<WebElement> extraOptions = getListOfWebElementsByXpath(driver, xpathInput);
-		for (WebElement option : extraOptions) {
-			System.out.println("values of each submodule : " + option.getAttribute("innerHTML"));
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-			if (option.getAttribute("innerHTML").contains("Accounts Dashboard")) {
-				JavascriptExecutor jsexec = (JavascriptExecutor) driver;
-				jsexec.executeScript("arguments[0].click();", option);
-				break;
-			}
-
 		}
 	}
 
@@ -228,8 +215,11 @@ public class WebElementConfig {
 
 	public static void zoomOut(WebDriver driver) throws Exception {
 
+		// for (int i = 0; i < magnifyTimes; i++) {
 		element = driver.findElement(By.tagName("html"));
 		element.sendKeys(Keys.chord(Keys.CONTROL, "0"));
+		// waitThread(500);
+		// }
 	}
 
 	public static void zoomOutRobot(WebDriver driver, double magnifyTimes) throws Exception {
@@ -297,6 +287,7 @@ public class WebElementConfig {
 		List<String> string = new ArrayList<String>();
 		List<WebElement> webElements = new ArrayList<WebElement>();
 		webElements = driver.findElements(By.id(id));
+		// System.out.println(webElements);
 		for (int i = 0; i < webElements.size(); i++) {
 			webElements.get(i).getText().trim();
 			string.add(webElements.get(i).getText().trim());
